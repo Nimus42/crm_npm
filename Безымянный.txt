@@ -1,0 +1,136 @@
+📂 CRM-RushdDigital
+├── 📁 prisma
+│   └── 📄 schema.prisma
+├── 📁 src
+│   ├── 📄 main.ts
+│   ├── 📄 app.module.ts
+│   ├── 📁 prisma
+│   │   ├── 📄 prisma.module.ts
+│   │   └── 📄 prisma.service.ts
+│   ├── 📁 users
+│   │   ├── 📄 users.module.ts
+│   │   ├── 📄 users.service.ts
+│   │   └── 📄 users.controller.ts
+│   └── 📁 auth
+│       ├── 📄 auth.module.ts
+│       ├── 📄 auth.service.ts
+│       ├── 📄 auth.controller.ts
+│       ├── 📁 dto
+│       │   ├── 📄 register.dto.ts
+│       │   └── 📄 login.dto.ts
+│       ├── 📁 strategies
+│       │   ├── 📄 jwt.strategy.ts
+│       │   └── 📄 jwt-refresh.strategy.ts
+│       ├── 📁 guards
+│       │   ├── 📄 jwt-auth.guard.ts
+│       │   ├── 📄 jwt-refresh.guard.ts
+│       │   └── 📄 roles.guard.ts
+│       └── 📁 decorators
+│           ├── 📄 roles.decorator.ts
+│           └── 📄 get-user.decorator.ts
+
+
+📁 src
+│   ├── 📁 clients
+│   │   ├── 📄 clients.module.ts
+│   │   ├── 📄 clients.service.ts
+│   │   ├── 📄 clients.controller.ts
+│   │   ├── 📄 client-audit.interceptor.ts
+│   │   └── 📁 dto
+│   │       ├── 📄 create-client.dto.ts
+│   │       └── 📄 update-client.dto.ts
+│   ├── 📁 lead-sources
+│   │   ├── 📄 lead-sources.module.ts
+│   │   ├── 📄 lead-sources.service.ts
+│   │   ├── 📄 lead-sources.controller.ts
+│   │   └── 📁 dto
+│   │       └── 📄 create-lead-source.dto.ts
+│   └── 📁 action-logs
+│       ├── 📄 action-logs.module.ts
+│       └── 📄 action-logs.service.ts
+
+
+📂 CRM-RushdDigital
+├── 📁 prisma
+│   └── 📄 schema.prisma
+├── 📁 src
+│   ├── 📁 funnel
+│   │   ├── 📄 funnel.module.ts
+│   │   ├── 📄 funnel.service.ts
+│   │   ├── 📄 funnel.controller.ts
+│   │   └── 📁 dto
+│   │       └── 📄 create-funnel-stage.dto.ts
+│   ├── 📁 projects
+│   │   ├── 📄 projects.module.ts
+│   │   ├── 📄 projects.service.ts
+│   │   ├── 📄 projects.controller.ts
+│   │   └── 📁 dto
+│   │       └── 📄 create-expense.dto.ts
+│   ├── 📁 tasks
+│   │   ├── 📄 tasks.module.ts
+│   │   ├── 📄 tasks.service.ts
+│   │   ├── 📄 tasks.controller.ts
+│   │   └── 📁 dto
+│   │       └── 📄 create-task.dto.ts
+│   └── 📁 clients
+│       └── 📄 clients.service.ts (Обновлено)
+
+
+📁 src
+│   ├── 📁 app
+│   │   ├── 📄 layout.tsx
+│   │   ├── 📄 page.tsx
+│   │   └── 📄 globals.css
+│   └── 📁 lib
+│       └── 📄 api.ts
+
+📁 src
+│   ├── 📁 store
+│   │   └── 📄 auth.ts
+│   ├── 📁 components
+│   │   └── 📁 guards
+│   │       ├── 📄 AuthGuard.tsx
+│   │       └── 📄 GuestGuard.tsx
+│   ├── 📁 app
+│   │   └── 📁 auth
+│   │       ├── 📄 layout.tsx
+│   │       ├── 📁 login
+│   │       │   └── 📄 page.tsx
+│   │       └── 📁 register
+│   │           └── 📄 page.tsx
+
+📁 src
+│   ├── 📁 components
+│   │   └── 📁 layout
+│   │       └── 📄 Sidebar.tsx
+│   ├── 📁 app
+│   │   └── 📁 (dashboard)
+│   │       ├── 📄 layout.tsx
+│   │       └── 📁 clients
+│   │           ├── 📄 page.tsx
+│   │           └── 📄 AddClientModal.tsx
+
+📁 src
+│   ├── 📁 app
+│   │   └── 📁 (dashboard)
+│   │       ├── 📁 funnel
+│   │       │   └── 📄 page.tsx
+│   │       └── 📁 projects
+│   │           ├── 📄 page.tsx
+│   │           └── 📄 AddExpenseModal.tsx
+
+📁 src
+│   ├── 📁 components
+│   │   └── 📁 layout
+│   │       ├── 📄 Sidebar.tsx
+│   │       └── 📄 Header.tsx
+│   ├── 📁 app
+│   │   └── 📁 (dashboard)
+│   │       ├── 📄 layout.tsx (Обновлено)
+│   │       ├── 📁 tasks
+│   │       │   └── 📄 page.tsx
+│   │       └── 📁 lms
+│   │           ├── 📄 page.tsx
+│   │           └── 📁 [courseId]
+│   │               └── 📁 exam
+│   │                   └── 📄 page.tsx

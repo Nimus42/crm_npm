@@ -1,0 +1,237 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  HEAD_SALES
+  MANAGER
+  STUDENT
+}
+
+enum Language {
+  RU
+  TG
+}
+
+model User {
+  id                  String       @id @default(uuid())
+  email               String       @unique
+  password            String
+  role                Role         @default(MANAGER)
+  language            Language     @default(RU)
+  
+  refreshToken        String?
+  failedLoginAttempts Int          @default(0)
+  lockoutUntil        DateTime?
+
+  clients             Client[]
+  actionLogs          ActionLog[]
+  projects            Project[]
+  tasks               Task[]
+
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  
+  exams               Exam[]
+  certificates        Certificate[]
+
+  telegramChatId String?        // Для привязки Telegram аккаунта менеджера
+  notifications       Notification[]
+}
+
+model LeadSource {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  clients   Client[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FunnelStage {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  order     Int      @default(0)
+  clients   Client[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Client {
+  id               String       @id @default(uuid())
+  name             String
+  phone            String
+  whatsapp         String?
+  telegram         String?
+  email            String?
+  company          String?
+  city             String?
+  
+  status           String       @default("Новый лид") // Устаревший статус, оставлен для обратной совместимости
+  stageId          String?
+  stage            FunnelStage? @relation(fields: [stageId], references: [id])
+  
+  comment          String?
+  
+  sourceId         String?
+  source           LeadSource?  @relation(fields: [sourceId], references: [id])
+  
+  managerId        String?
+  manager          User?        @relation(fields: [managerId], references: [id])
+
+  project          Project?
+  tasks            Task[]
+
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+model Project {
+  id           String    @id @default(uuid())
+  name         String
+  revenue      Float     @default(0)
+  netProfit    Float     @default(0)
+  managerBonus Float     @default(0)
+  status       String    @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED
+  
+  clientId     String    @unique
+  client       Client    @relation(fields: [clientId], references: [id])
+  
+  managerId    String
+  manager      User      @relation(fields: [managerId], references: [id])
+
+  expenses     Expense[]
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Expense {
+  id          String   @id @default(uuid())
+  name        String   // Дизайн, Домен, Хостинг и т.д.
+  amount      Float
+  
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  description String
+  deadline    DateTime
+  status      String   @default("OPEN") // OPEN, IN_PROGRESS, DONE
+  
+  managerId   String
+  manager     User     @relation(fields: [managerId], references: [id])
+  
+  clientId    String?
+  client      Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ActionLog {
+  id         String   @id @default(uuid())
+  entityName String   
+  entityId   String
+  action     String   
+  oldData    Json?
+  newData    Json?
+  
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+
+  createdAt  DateTime @default(now())
+}
+
+model Course {
+  id          String        @id @default(uuid())
+  title       String
+  description String?
+  
+  modules     Module[]
+  questions   Question[]
+  exams       Exam[]
+  certificates Certificate[]
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Module {
+  id          String   @id @default(uuid())
+  title       String
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  lessons     Lesson[]
+}
+
+model Lesson {
+  id          String   @id @default(uuid())
+  title       String
+  content     String?
+  videoUrl    String?
+  
+  moduleId    String
+  module      Module   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+}
+
+model Question {
+  id                 String   @id @default(uuid())
+  text               String
+  options            Json     // Хранение массива вариантов ответов: ["Вариант А", "Вариант Б", ...]
+  correctOptionIndex Int      // Индекс правильного ответа (например, 0, 1, 2)
+  
+  courseId           String
+  course             Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+}
+
+model Exam {
+  id          String   @id @default(uuid())
+  score       Int
+  maxScore    Int      @default(100)
+  passed      Boolean
+
+  studentId   String
+  student     User     @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+}
+
+model Certificate {
+  id          String   @id @default(uuid())
+  url         String   // Ссылка на PDF или сгенерированный файл
+  
+  studentId   String
+  student     User     @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+}

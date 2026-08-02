@@ -1,0 +1,21 @@
+{"timestamp":"00:00:02.424","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:02.425","source":"Server","level":"LOG","message":"  We detected TypeScript in your project and reconfigured your tsconfig.json file for you. Strict-mode is set to false by default."}
+{"timestamp":"00:00:02.425","source":"Server","level":"LOG","message":"  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:\n"}
+{"timestamp":"00:00:02.426","source":"Server","level":"LOG","message":"  \t- allowJs was set to true"}
+{"timestamp":"00:00:02.427","source":"Server","level":"LOG","message":"  \t- strict was set to false"}
+{"timestamp":"00:00:02.427","source":"Server","level":"LOG","message":"  \t- noEmit was set to true"}
+{"timestamp":"00:00:02.427","source":"Server","level":"LOG","message":"  \t- include was updated to add '.next/dev/types/**/*.ts'"}
+{"timestamp":"00:00:02.428","source":"Server","level":"LOG","message":"  \t- plugins was updated to add { name: 'next' }"}
+{"timestamp":"00:00:02.428","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:02.428","source":"Server","level":"LOG","message":"  The following mandatory changes were made to your tsconfig.json:\n"}
+{"timestamp":"00:00:02.429","source":"Server","level":"LOG","message":"  \t- esModuleInterop was set to true (requirement for SWC / babel)"}
+{"timestamp":"00:00:02.429","source":"Server","level":"LOG","message":"  \t- moduleResolution was set to node (to match webpack resolution)"}
+{"timestamp":"00:00:02.429","source":"Server","level":"LOG","message":"  \t- resolveJsonModule was set to true (to match webpack resolution)"}
+{"timestamp":"00:00:02.429","source":"Server","level":"LOG","message":"  \t- isolatedModules was set to true (requirement for SWC / Babel)"}
+{"timestamp":"00:00:02.429","source":"Server","level":"LOG","message":"  \t- jsx was set to react-jsx (next.js uses the React automatic runtime)"}
+{"timestamp":"00:00:02.430","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:03.102","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:36.056","source":"Server","level":"LOG","message":"○ Compiling /_not-found/page ..."}
+{"timestamp":"00:00:39.176","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:01:46.773","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:02:06.317","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
